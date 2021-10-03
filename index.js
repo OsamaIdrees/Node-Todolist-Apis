@@ -7,6 +7,9 @@ app.use(express.urlencoded({
     extended:true
 }));
 app.use(express.json())
+app.get("/",function(req,res){
+    res.send("Welcome to Node Apis")
+})
 app.get("/get-all-tasks",function(req,res){
    db.query("select * from todolist",function(err,result){
        if(err){
@@ -48,5 +51,8 @@ app.get("/delete-todo-task/:task_id",function(req,res){
             
         }
     })
+})
+app.get("*",function(req,res){
+    res.send("Sorry! Route does not exist")
 })
 app.listen("5000")
